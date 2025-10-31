@@ -1,0 +1,13 @@
+﻿using HotelBooking.Models;
+
+namespace HotelBooking.IRepository
+{
+    public interface IGenaricRepository<TableModel> where TableModel : class
+    {
+        public List<TableModel> Get();
+        public TableModel GetById(int id);
+        public void Insert(TableModel model);
+        public void Update(TableModel model);
+        public void Delete(int id);
+    }
+}

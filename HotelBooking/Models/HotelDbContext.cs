@@ -25,7 +25,7 @@ namespace HotelBooking.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-5KOO9A6\\SQLEXPRESS2022;Database=BookingHotel;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=.;Database=BookingHotel;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
 

@@ -1,7 +1,12 @@
+using HotelBooking.IRepository;
+using HotelBooking.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped(typeof(IGenaricRepository<>), typeof(GenaricRepository<>));
+
 
 var app = builder.Build();
 

@@ -4007,23 +4007,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ramez Osama\\.nuget\\packages\\": {},
+    "C:\\Users\\mr411\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\c#\\HotelBooking\\HotelBooking\\HotelBooking.csproj",
+      "projectUniqueName": "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\HotelBooking.csproj",
       "projectName": "HotelBooking",
-      "projectPath": "D:\\Repos\\c#\\HotelBooking\\HotelBooking\\HotelBooking.csproj",
-      "packagesPath": "C:\\Users\\Ramez Osama\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\c#\\HotelBooking\\HotelBooking\\obj\\",
+      "projectPath": "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\HotelBooking.csproj",
+      "packagesPath": "C:\\Users\\mr411\\.nuget\\packages\\",
+      "outputPath": "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ramez Osama\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mr411\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
