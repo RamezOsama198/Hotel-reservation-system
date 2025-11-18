@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\HotelBooking.csproj": {}
+    "C:\\Users\\emadb\\source\\repos\\Hotel-reservation-system\\HotelBooking\\HotelBooking.csproj": {}
   },
   "projects": {
-    "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\HotelBooking.csproj": {
+    "C:\\Users\\emadb\\source\\repos\\Hotel-reservation-system\\HotelBooking\\HotelBooking.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\HotelBooking.csproj",
+        "projectUniqueName": "C:\\Users\\emadb\\source\\repos\\Hotel-reservation-system\\HotelBooking\\HotelBooking.csproj",
         "projectName": "HotelBooking",
-        "projectPath": "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\HotelBooking.csproj",
-        "packagesPath": "C:\\Users\\mr411\\.nuget\\packages\\",
-        "outputPath": "D:\\DEPI_Project\\Hotel-reservation-system-main\\HotelBooking\\obj\\",
+        "projectPath": "C:\\Users\\emadb\\source\\repos\\Hotel-reservation-system\\HotelBooking\\HotelBooking.csproj",
+        "packagesPath": "C:\\Users\\emadb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\emadb\\source\\repos\\Hotel-reservation-system\\HotelBooking\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\mr411\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\emadb\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,13 +44,16 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.19, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.19, )"
@@ -91,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

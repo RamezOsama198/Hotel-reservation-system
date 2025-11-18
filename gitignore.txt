@@ -1,0 +1,33 @@
+## Ignore Visual Studio temporary files, build results, and user-specific files
+.vs/
+*.user
+*.suo
+*.cache
+*.pdb
+*.log
+
+# Build Folders
+bin/
+obj/
+out/
+
+# EF Core Migrations (optional, if you want to ignore auto-generated migrations)
+# Migrations/
+# *.Designer.cs
+
+# ASP.NET Core files
+appsettings*.json.user
+appsettings.Development.json
+wwwroot/lib/
+
+# Rider
+.idea/
+
+# Node.js/npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS Files
+Thumbs.db
+.DS_Store

@@ -1,33 +1,48 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Models
 {
-    public class HotelDbContext : DbContext
+    public class HotelDbContext : IdentityDbContext<User>
     {
-        public virtual DbSet<Admin> Admins { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<Room> Rooms { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
-        public virtual DbSet<Booking> Bookings { get; set; }
-        public virtual DbSet<Stuff> Stuffs { get; set; }
+        public HotelDbContext(DbContextOptions<HotelDbContext> options) : base(options) { }
+
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Stuff> Stuffs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Bookings and admin relation many to many
+            base.OnModelCreating(modelBuilder);
+
+            // 1-to-1 with Identity User
+            modelBuilder.Entity<Client>()
+                .HasOne(c => c.User)
+                .WithOne()
+                .HasForeignKey<Client>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Admin>()
-                .HasMany(b => b.Bookings).WithMany(a => a.Admins);
+                .HasOne(a => a.User)
+                .WithOne()
+                .HasForeignKey<Admin>(a => a.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Admin an comments
+            // Many-to-many
+            modelBuilder.Entity<Admin>()
+                .HasMany(b => b.Bookings)
+                .WithMany(a => a.Admins);
+
             modelBuilder.Entity<Comment>()
-                .HasMany(a => a.Admins).WithMany(c => c.Comments);
-            //staff and room
-            modelBuilder.Entity<Stuff>()
-                .HasMany(r => r.Rooms).WithMany(s => s.Stuffs);
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=.;Database=BookingHotel;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True");
-            base.OnConfiguring(optionsBuilder);
-        }
+                .HasMany(a => a.Admins)
+                .WithMany(c => c.Comments);
 
+            modelBuilder.Entity<Stuff>()
+                .HasMany(r => r.Rooms)
+                .WithMany(s => s.Stuffs);
+        }
     }
 }

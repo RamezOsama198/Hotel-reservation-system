@@ -10,7 +10,7 @@ namespace HotelBooking.Models
         [Required]
         public string Title { get; set; }
         [Required]
-        [StringLength(1000,ErrorMessage ="Please sir you do not have to explain all the tetails")]
+        [StringLength(1000,ErrorMessage ="Please sir you do not have to explain all the Details")]
         [MinLength(10,ErrorMessage ="please explain more")]
         public string Description { get; set; }
         [ForeignKey("client")]
