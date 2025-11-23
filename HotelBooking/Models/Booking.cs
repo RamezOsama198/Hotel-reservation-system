@@ -21,6 +21,8 @@ namespace HotelBooking.Models
         public int ClientId { get; set; }
         public Client client { get; set; }
         public virtual List<Room> rooms { get; set; }
+        public bool IsCheckedIn { get; set; }
+        public bool IsCheckedOut { get; set; }
 
         //for many to many
         public virtual List<Admin> Admins { get; set; } = new();
