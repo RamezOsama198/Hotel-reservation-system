@@ -10,12 +10,10 @@ namespace HotelBooking.Controllers
     [Authorize(Roles = "Client")]
     public class ClientController : Controller
     {
-        private readonly HotelDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         public ClientController(HotelDbContext context, UserManager<User> userManager, IUnitOfWork unitOfWork)
         {
-            _context = context;
             _userManager = userManager;
             _unitOfWork = unitOfWork;
         }

@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\DEPI_Project\\Hotel-reservation-system\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\depi_project\\hotel-reservation-system\\hotelbooking\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClientController.cs",
+              "DocumentMoniker": "D:\\DEPI_Project\\Hotel-reservation-system\\HotelBooking\\Controllers\\ClientController.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Controllers\\ClientController.cs",
+              "ToolTip": "D:\\DEPI_Project\\Hotel-reservation-system\\HotelBooking\\Controllers\\ClientController.cs",
+              "RelativeToolTip": "HotelBooking\\Controllers\\ClientController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T19:35:55.273Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
