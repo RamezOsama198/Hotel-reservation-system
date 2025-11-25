@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿using HotelBooking.Interfaces;
+using HotelBooking.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,12 @@ namespace HotelBooking.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
-        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly IUnitOfWork _unitOfWork;
+        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
         }
 
         // Admin Dashboard

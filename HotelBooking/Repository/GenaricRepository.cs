@@ -14,7 +14,7 @@ namespace HotelBooking.Repository
             _model = hotelDbContext.Set<TableModel>();
         }
 
-        public List<TableModel> Get()
+        public List<TableModel> GetAll()
         {
             List<TableModel> models = _model.AsNoTracking().ToList();
             return models;

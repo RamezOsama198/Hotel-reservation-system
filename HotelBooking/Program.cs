@@ -1,6 +1,9 @@
+using HotelBooking.Data;
+using HotelBooking.Interfaces;
 using HotelBooking.IRepository;
 using HotelBooking.Models;
 using HotelBooking.Repository;
+using HotelBooking.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +26,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 // Add repositories
 builder.Services.AddScoped(typeof(IGenaricRepository<>), typeof(GenaricRepository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllersWithViews();
 

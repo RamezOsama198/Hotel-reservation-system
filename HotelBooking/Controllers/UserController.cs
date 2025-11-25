@@ -1,28 +1,28 @@
-﻿using HotelBooking.Models;
+﻿using HotelBooking.Interfaces;
+using HotelBooking.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBooking.Controllers
 {
-    public class AccountController : Controller
+    public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IUnitOfWork _unitOfWork;
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
         }
 
-        // GET: Register
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: Register
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterVM model)
@@ -41,7 +41,6 @@ namespace HotelBooking.Controllers
 
             if (result.Succeeded)
             {
-                // Redirect to a "Success" page
                 return RedirectToAction("RegisterSuccess");
             }
 
@@ -53,21 +52,18 @@ namespace HotelBooking.Controllers
             return View(model);
         }
 
-        // GET: Register Success
         [HttpGet]
         public IActionResult RegisterSuccess()
         {
             return View();
         }
 
-        // GET: Login
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: Login
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM model)
@@ -80,7 +76,6 @@ namespace HotelBooking.Controllers
 
             if (result.Succeeded)
             {
-                // Redirect to home with a TempData message
                 TempData["LoginSuccess"] = "Login successful!";
                 return RedirectToAction("Index", "Home");
             }

@@ -35,7 +35,7 @@
                                 <span class="navbar-text me-3">Hello, @User.Identity.Name</span>
                             </li>
                             <li class="nav-item">
-                                <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                <form asp-controller="User" asp-action="Logout" method="post" class="d-inline">
                                     <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
                                 </form>
                             </li>
@@ -44,10 +44,10 @@
                         {
                             <!-- Guest user -->
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="btn btn-outline-primary me-2" asp-controller="User" asp-action="Login">Log In</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="btn btn-primary" asp-controller="User" asp-action="Register">Sign Up</a>
                             </li>
                         }
                     </ul>
