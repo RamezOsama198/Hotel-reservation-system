@@ -125,5 +125,21 @@ namespace HotelBooking.Controllers
 
         //    return RedirectToAction("Profile");
         //}
+        [HttpPost]
+        public IActionResult AddComment(Comment comment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(comment);
+            }
+
+            _unitOfWork.Comments.Insert(comment);
+
+            TempData["msg"] = "Comment sent successfully!";
+            return RedirectToAction("AddComment");
+        }
+
+
+
     }
 }

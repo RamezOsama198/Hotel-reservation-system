@@ -1,0 +1,204 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\hotel_booking\\Hotel-reservation-system\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\controllers\\admincontroller1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\controllers\\admincontroller1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\repository\\genaricrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\repository\\genaricrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\controllers\\stuffscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\controllers\\stuffscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|d:\\hotel_booking\\hotel-reservation-system\\hotelbooking\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F680E9A2-9BB4-4CC2-BC56-AA976A690D55}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Client.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Client.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Models\\Client.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Client.cs",
+              "RelativeToolTip": "HotelBooking\\Models\\Client.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:44:53.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Models\\Booking.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Booking.cs",
+              "RelativeToolTip": "HotelBooking\\Models\\Booking.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:44:43.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Admin.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Models\\Admin.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Admin.cs",
+              "RelativeToolTip": "HotelBooking\\Models\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T19:44:37.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Models\\Comment.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Models\\Comment.cs",
+              "RelativeToolTip": "HotelBooking\\Models\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T16:27:28.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Repository\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Repository\\UnitOfWork.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Repository\\UnitOfWork.cs",
+              "RelativeToolTip": "HotelBooking\\Repository\\UnitOfWork.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAwBsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T14:25:17.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GenaricRepository.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Repository\\GenaricRepository.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Repository\\GenaricRepository.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Repository\\GenaricRepository.cs",
+              "RelativeToolTip": "HotelBooking\\Repository\\GenaricRepository.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwCUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T14:07:29.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AdminController1.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\AdminController1.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Controllers\\AdminController1.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\AdminController1.cs",
+              "RelativeToolTip": "HotelBooking\\Controllers\\AdminController1.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAYwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T11:27:44.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StuffsController.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\StuffsController.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Controllers\\StuffsController.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\StuffsController.cs",
+              "RelativeToolTip": "HotelBooking\\Controllers\\StuffsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T10:31:53.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "HotelBooking\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T10:31:31.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClientController.cs",
+              "DocumentMoniker": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\ClientController.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Controllers\\ClientController.cs",
+              "ToolTip": "D:\\hotel_booking\\Hotel-reservation-system\\HotelBooking\\Controllers\\ClientController.cs",
+              "RelativeToolTip": "HotelBooking\\Controllers\\ClientController.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAowIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T19:35:55.273Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
