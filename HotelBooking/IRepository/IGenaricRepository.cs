@@ -9,5 +9,7 @@ namespace HotelBooking.IRepository
         public void Insert(TableModel model);
         public void Update(TableModel model);
         public void Delete(int id);
+        public void Delete(string id);
+        public TableModel GetById(string id);
     }
 }

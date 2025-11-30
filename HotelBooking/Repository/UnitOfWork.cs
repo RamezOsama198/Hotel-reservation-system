@@ -11,19 +11,23 @@ namespace HotelBooking.Services
         private readonly HotelDbContext _context;
 
         public IGenaricRepository<Booking> Bookings { get; private set; }
-        public IGenaricRepository<Room> Rooms { get; private set; }
+        public IRoomRepository Rooms { get; private set; }
         public IGenaricRepository<Stuff> Stuffs { get; private set; }
         public IGenaricRepository<Comment> Comments { get; private set; }
-
+        public IClientRepository Clients { get; private set; }
+        public IGenaricRepository<Admin> Admins { get; private set; }
         public UnitOfWork(HotelDbContext context)
         {
             _context = context;
 
             Bookings = new GenaricRepository<Booking>(context);
-            Rooms = new GenaricRepository<Room>(context);
+            Rooms = new RoomRepository(context);
             Stuffs = new GenaricRepository<Stuff>(context);
             Comments = new GenaricRepository<Comment>(context);
+            Clients = new ClientRepository(context);
+            Admins = new GenaricRepository<Admin>(context);
         }
+
 
         public void Dispose()
         {

@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<HotelBooking.Models.User> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+    var name = currentUser?.Name ?? User.Identity.Name;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -32,7 +39,7 @@
                         {
                             <!-- Logged-in user -->
                             <li class="nav-item">
-                                <span class="navbar-text me-3">Hello, @User.Identity.Name</span>
+                                <span class="navbar-text me-3">Hello, @name</span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="User" asp-action="Logout" method="post" class="d-inline">

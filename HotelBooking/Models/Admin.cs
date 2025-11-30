@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelBooking.Models
 {
     public class Admin
     {
-        [Key]
-        public int Id { get; set; }
-
+        [Key, ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }
 
@@ -15,7 +14,7 @@ namespace HotelBooking.Models
 
         [Required]
         [Range(1000, 50000)]
-        public double Salary { get; set; }
+        public double? Salary { get; set; }
 
         public virtual List<Stuff> Stuffs { get; set; } = new();
         public virtual List<Booking> Bookings { get; set; } = new();

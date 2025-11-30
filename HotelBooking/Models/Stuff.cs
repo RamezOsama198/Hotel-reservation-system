@@ -20,7 +20,7 @@ namespace HotelBooking.Models
         [Required]
         public string Gender { get; set; }
         [ForeignKey("admin")]
-        public int AdminId { get; set; }
+        public string AdminId { get; set; }
         public Admin admin { get; set; }
         //for many to many
         public List<Room> Rooms { get; set; }

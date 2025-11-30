@@ -1,0 +1,58 @@
+﻿@model List<HotelBooking.ViewModel.UserWithRoleVM>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>All Users</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    @if (user.Salary.HasValue)
+                    {
+                        @user.Salary.Value.ToString("F2")
+                    }
+                </td>
+                <td>
+                    @if (user.Role != "SuperAdmin")
+                    {
+                        <a class="btn btn-primary btn-sm" href="@Url.Action("EditUser", new { id = user.Id })">Edit</a>
+                        <form asp-action="DeleteUser" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No actions</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mb-3">
+    <a class="btn btn-success" href="@Url.Action("CreateAdmin")">Add Admin</a>
+</div>

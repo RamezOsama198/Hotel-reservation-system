@@ -25,6 +25,11 @@ namespace HotelBooking.Repository
             TableModel model = _model.Find(id);
             return model;
         }
+        public TableModel GetById(string id)
+        {
+            TableModel model = _model.Find(id);
+            return model;
+        }
 
         public void Insert(TableModel model)
         {
@@ -38,6 +43,13 @@ namespace HotelBooking.Repository
             _hotelDbContext.SaveChanges();
         }
         public void Delete(int id)
+        {
+            TableModel model = GetById(id);
+            _model.Remove(model);
+            _hotelDbContext.SaveChanges();
+        }
+
+        public void Delete(string id)
         {
             TableModel model = GetById(id);
             _model.Remove(model);

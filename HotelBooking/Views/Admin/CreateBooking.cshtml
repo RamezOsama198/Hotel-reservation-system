@@ -1,0 +1,141 @@
+﻿@model ClientBookingVM
+@using HotelBooking.Models
+@using HotelBooking.ViewModel
+
+@{
+    ViewData["Title"] = "Create Booking (Admin)";
+    var rooms = ViewBag.AvailableRooms as IEnumerable<Room>;
+}
+
+<h2>Create Booking for Client</h2>
+<hr />
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+<form asp-controller="Admin" asp-action="CreateBooking" method="post">
+    <h4>Client Information</h4>
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Confirm password</label>
+        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">National ID</label>
+            <input asp-for="NationalId" class="form-control" />
+            <span asp-validation-for="NationalId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Address</label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+
+    <hr />
+
+    <h4>Booking Details</h4>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Check-In Date</label>
+            <input asp-for="CheckInTime" type="date" class="form-control" />
+            <span asp-validation-for="CheckInTime" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Check-Out Date</label>
+            <input asp-for="CheckOutTime" type="date" class="form-control" />
+            <span asp-validation-for="CheckOutTime" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="Gym" class="form-check-input" type="checkbox" />
+        <label class="form-check-label">Gym Access</label>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="SPA" class="form-check-input" type="checkbox" />
+        <label class="form-check-label">SPA Access</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Select Rooms</label>
+
+        <!-- Search -->
+        <input type="text" id="roomSearch" class="form-control mb-2" placeholder="Search rooms..." />
+
+        <div id="roomsContainer" style="max-height: 250px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+
+            @foreach (var room in rooms)
+            {
+                <div class="form-check room-item mb-2">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="RoomIds"
+                           value="@room.Id"
+                           id="room_@room.Id" />
+
+                    <label class="form-check-label" for="room_@room.Id">
+                        <strong>@room.Id</strong> - @room.RoomType
+                        | Price: @room.PricePerDay
+                    </label>
+                </div>
+            }
+        </div>
+
+        <span asp-validation-for="RoomIds" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Create Booking</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script>
+    const searchBox = document.getElementById("roomSearch");
+    const roomItems = document.querySelectorAll(".room-item");
+
+    searchBox.addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+        roomItems.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            item.style.display = text.includes(value) ? "block" : "none";
+        });
+    });
+</script>

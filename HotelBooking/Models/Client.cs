@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelBooking.Models
 {
     public class Client
     {
-        [Key]
-        public int Id { get; set; }
-
+        [Key, ForeignKey("User")]
         public string UserId { get; set; }
         public User User { get; set; }
 
@@ -15,7 +14,7 @@ namespace HotelBooking.Models
         public string Address { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 4)]
+        [StringLength(14, MinimumLength = 14)]
         public string NationalId { get; set; }
 
         public virtual List<Comment> comments { get; set; } = new();

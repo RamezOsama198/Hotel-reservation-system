@@ -1,9 +1,11 @@
 using HotelBooking.Data;
 using HotelBooking.Interfaces;
 using HotelBooking.IRepository;
+using HotelBooking.IServicesLayer;
 using HotelBooking.Models;
 using HotelBooking.Repository;
 using HotelBooking.Services;
+using HotelBooking.ServicesLayer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,12 +23,13 @@ builder.Services.AddIdentity<User, IdentityRole>()
 // Configure cookies
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Account/Login";
+    options.LoginPath = "/User/Login";
 });
 
 // Add repositories
 builder.Services.AddScoped(typeof(IGenaricRepository<>), typeof(GenaricRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IBookingServices, BookingService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -47,5 +50,7 @@ using (var scope = app.Services.CreateScope())
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await RoleSeeder.SeedRolesAsync(roleManager);
 }
+
+await SeedSuperAdmin.SeedAsync(app);
 
 app.Run();

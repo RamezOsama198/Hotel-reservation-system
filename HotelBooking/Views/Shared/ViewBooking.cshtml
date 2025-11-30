@@ -1,0 +1,155 @@
+﻿@using System.Collections.Generic
+@using HotelBooking.Models
+@model IEnumerable<Booking>
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<style>
+    /* Styling for the main statistical cards */
+    .dashboard-card {
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        min-height: 120px;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+    .card-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .card-label {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .metric-spacer {
+        height: 12px;
+    }
+</style>
+
+<div class="container-fluid py-5">
+    <h1 class="mb-5 text-primary">Administration Dashboard</h1>
+    <hr />
+
+    <h2 class="mb-4">Key Metrics Overview</h2>
+
+    <div class="row">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card dashboard-card bg-info text-white">
+                <div class="card-body">
+                    <p class="card-label">Active Stays</p>
+                    <div class="card-number">{{ Number of Active Bookings }}</div>
+                    <div class="metric-spacer"></div>
+                    <small>Guests currently checked in</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card dashboard-card bg-success text-white">
+                <div class="card-body">
+                    <p class="card-label">Rooms Available Now</p>
+                    <div class="card-number">{{ Available Rooms }}</div>
+                    <div class="metric-spacer"></div>
+                    <small>Out of {{ Total Rooms }}</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card dashboard-card bg-warning text-dark">
+                <div class="card-body">
+                    <p class="card-label">Hotel Personnel</p>
+                    <div class="card-number">{{ Total Staff Count }}</div>
+                    <a asp-action="GetAllStuff" class="btn btn-sm btn-outline-dark mt-2">Manage Staff</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card dashboard-card bg-danger text-white">
+                <div class="card-body">
+                    <p class="card-label">New Customer Feedback</p>
+                    <div class="card-number">{{ Unread Comment Count }}</div>
+                    <a asp-action="AllComments" class="btn btn-sm btn-outline-light mt-2">Review All Comments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <h2 class="mt-5 mb-4">Recent Bookings Activity</h2>
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Latest Booking Transactions</h4>
+            <small>Data returned by the <code>Index()</code> Action.</small>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Booking Date</th>
+                        <th>Checked In?</th>
+                        <th>Checked Out?</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Model.OrderByDescending(b => b.checkInTime).Take(10))
+                    {
+                        <tr>
+                            <td>@booking.Id</td>
+                            <td>@booking.checkInTime.ToShortDateString()</td>
+                            <td>
+                                <span class="badge @(booking.IsCheckedIn ? "bg-success" : "bg-secondary")">
+                                    @(booking.IsCheckedIn ? "Yes" : "No")
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge @(booking.IsCheckedOut ? "bg-info" : "bg-warning text-dark")">
+                                    @(booking.IsCheckedOut ? "Completed" : "Active Stay")
+                                </span>
+                            </td>
+                            <td>
+                                @if (!booking.IsCheckedIn)
+                                {
+                                    <form asp-action="CheckIn" method="post" class="d-inline">
+                                        <input type="hidden" name="bookingId" value="@booking.Id" />
+                                        <button type="submit" class="btn btn-sm btn-success">Check In</button>
+                                    </form>
+                                }
+                                @if (booking.IsCheckedIn && !booking.IsCheckedOut)
+                                {
+                                    <form asp-action="CheckOut" method="post" class="d-inline">
+                                        <input type="hidden" name="bookingId" value="@booking.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Check Out</button>
+                                    </form>
+                                }
+                                @if (booking.IsCheckedOut)
+                                {
+                                    <span class="text-muted small">Stay Concluded</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-outline-primary">View All Bookings</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,84 @@
-﻿@model HotelBooking.Models.RegisterVM
+﻿@using HotelBooking.ViewModel
+@model RegisterVM
+
+<style>
+    body {
+        background-color: #000; /* Black background */
+        color: #FFD700; /* Golden Yellow text */
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .card {
+        background-color: #111; /* Dark card */
+        border: 1px solid #FFD700; /* Yellow border */
+        color: #FFD700;
+    }
+
+    h2 {
+        color: #FFD700;
+        text-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+    }
+
+    .form-label {
+        color: #FFD700;
+        font-weight: bold;
+    }
+
+    .form-control {
+        background-color: #000;
+        border: 1px solid #FFD700;
+        color: #FFD700;
+    }
+
+        .form-control:focus {
+            background-color: #111;
+            border-color: #FFD700;
+            box-shadow: 0 0 8px #FFD700;
+            color: #FFD700;
+        }
+
+    .btn-primary {
+        background-color: #FFD700;
+        border: none;
+        color: #000;
+        font-weight: bold;
+    }
+
+        .btn-primary:hover {
+            background-color: #e6c200;
+            color: #000;
+        }
+
+    .alert-success {
+        background-color: #FFD700;
+        color: #000;
+        border: none;
+        font-weight: bold;
+    }
+
+    a {
+        color: #FFD700;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+            color: #e6c200;
+        }
+</style>
 
 <h2>Register</h2>
-
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
 <form asp-action="Register" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -27,6 +104,23 @@
         <label asp-for="ConfirmPassword" class="form-label"></label>
         <input asp-for="ConfirmPassword" class="form-control" />
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NationalId" class="form-label"></label>
+        <input asp-for="NationalId" class="form-control" />
+        <span asp-validation-for="NationalId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PhoneNumber" class="form-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>

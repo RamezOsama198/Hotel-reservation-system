@@ -1,8 +1,241 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor | Absolute Grandeur</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Typography: Using classic Serif fonts for a sense of timeless luxury */
+        body {
+            background-color: #0d0d0d; /* Near-black background for dramatic depth */
+            color: #f5f5f5; /* Off-white/cream text */
+            font-family: 'Times New Roman', serif;
+        }
+        /* Hero Section */
+        .hero-section {
+            height: 95vh; /* Almost full viewport height for image dominance */
+            background: url('@Url.Content("~/Images/HomePage.png")') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 20vh;
+        }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to highlight gold text */
+        }
+
+        .hero-title {
+            font-size: 6rem; /* Extra large font size */
+            font-weight: 700;
+            color: #d4af37; /* Gold color */
+            letter-spacing: 5px; /* Spaced letters for a premium look */
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.8); /* Subtle gold glow */
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #ffffff;
+            font-style: italic;
+            margin-top: -10px;
+        }
+        /* Booking Bar */
+        .booking-bar {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 30px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin-top: -15vh; /* Pulls it up to sit visually under the Hero */
+            position: relative;
+            z-index: 10;
+        }
+
+        .booking-btn {
+            background-color: #d4af37; /* Gold Button */
+            color: #000000;
+            font-weight: bolder;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+            .booking-btn:hover {
+                background-color: #a88b32;
+            }
+        /* Feature Cards (Image Focus) */
+        .feature-item {
+            position: relative;
+            overflow: hidden;
+            height: 350px;
+        }
+
+            .feature-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.8s ease-in-out;
+            }
+
+            .feature-item:hover img {
+                transform: scale(1.1); /* Zoom effect for visual excitement */
+            }
+
+        .feature-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            padding: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <p class="hero-subtitle mb-0">Because You Deserve the Finest</p>
+            <h1 class="hero-title">The Noble's Palace</h1>
+            <p class="lead mt-4 fs-3 fw-light text-white">Where timeless luxury meets exceptional service in the heart of the city.</p>
+        </div>
+    </header>
+
+    @* <section class="booking-bar">
+        <div class="container">
+            <form class="row g-3 align-items-center justify-content-center">
+                <div class="col-md-3">
+                    <input type="date" class="form-control form-control-lg bg-dark text-white border-warning" required aria-label="Check-in">
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control form-control-lg bg-dark text-white border-warning" required aria-label="Check-out">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select form-select-lg bg-dark text-white border-warning" aria-label="Guests">
+                        <option selected>Guests: 2</option>
+                        <option value="3">Guests: 3</option>
+                        <option value="4">More</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-lg w-100 booking-btn shadow-lg">Check Suite Availability</button>
+                </div>
+            </form>
+        </div>
+    </section> *@
+
+    ---
+
+
+
+    <section class="py-5">
+        <div class="container my-5">
+            <h2 class="text-center mb-5 fw-bolder display-4 text-warning">Experiences Beyond Compare</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item rounded shadow-lg">
+                        <img src="@Url.Content("~/Images/Royal.png")" alt="The Royal Suite" class="img-fluid">
+                        <div class="feature-caption">
+                            <h4 class="fw-bolder text-warning">The Presidential Wings</h4>
+                            <p class="text-white-50 small">Private luxury that defines extravagance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item rounded shadow-lg">
+                        <img src="@Url.Content("~/Images/Grund.png")" alt="Grand Lobby" class="img-fluid">
+                        <div class="feature-caption">
+                            <h4 class="fw-bolder text-warning">Exquisite Arrival</h4>
+                            <p class="text-white-50 small">A grand welcome reflecting our heritage.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item rounded shadow-lg">
+                        <img src="@Url.Content("~/Images/fine.png")" alt="Fine Dining" class="img-fluid">
+                        <div class="feature-caption">
+                            <h4 class="fw-bolder text-warning">Artisanal Cuisine</h4>
+                            <p class="text-white-50 small">Culinary mastery in every single dish.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item rounded shadow-lg">
+                        <img src="@Url.Content("~/Images/SPA.png")" alt="Luxury Spa" class="img-fluid">
+                        <div class="feature-caption">
+                            <h4 class="fw-bolder text-warning">Absolute Serenity</h4>
+                            <p class="text-white-50 small">A world dedicated to your total renewal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+
+
+    @* <section class="py-5 bg-dark">
+        <div class="container my-5">
+            <h2 class="text-center mb-5 fw-bolder display-4 text-white">Impressions of the Elite</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 mb-4">
+                    <blockquote class="blockquote p-5 bg-black rounded shadow-lg border-start border-warning border-5 text-center">
+                        <p class="mb-0 fst-italic lead text-white-75">"The epitome of classical luxury. Every moment here is an unforgettable work of art."</p>
+                        <footer class="blockquote-footer mt-4 fw-bold text-warning">
+                            Royal Family Guest <cite title="Source Title">Saudi Arabia</cite>
+                            <span class="d-block mt-1">⭐⭐⭐⭐⭐</span>
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="col-lg-5 col-md-6 mb-4">
+                    <blockquote class="blockquote p-5 bg-black rounded shadow-lg border-start border-warning border-5 text-center">
+                        <p class="mb-0 fst-italic lead text-white-75">"The attention to detail is staggering. You are made to feel like the only and most important guest in the world."</p>
+                        <footer class="blockquote-footer mt-4 fw-bold text-warning">
+                            Noted Dignitary <cite title="Source Title">Italy</cite>
+                            <span class="d-block mt-1">⭐⭐⭐⭐⭐</span>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    ---
+
+    
+
+    <section class="py-5 bg-black text-center">
+        <div class="container">
+            <h3 class="fw-bolder mb-3 display-5 text-warning">It is not a hotel, it is a legacy.</h3>
+            <p class="lead mb-4 text-white-50">The residence experience you deserve. Step into the world of genuine luxury.</p>
+            <a href="{{ Suites Page Link }}" class="btn btn-warning btn-lg fw-bolder px-5 py-3 shadow-lg">Enter Our World</a>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> *@
+</body>
+</html>

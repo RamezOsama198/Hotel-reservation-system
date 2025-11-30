@@ -1,0 +1,199 @@
+﻿@using System.Collections.Generic
+@using HotelBooking.Models
+@model IEnumerable<Booking>
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    var role = ViewBag.AdminRole as string;
+}
+
+<style>
+    /* Styling for the main statistical cards */
+    .dashboard-card {
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        min-height: 120px;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+    .card-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .card-label {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .metric-spacer {
+        height: 12px;
+    }
+</style>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+<div class="container-fluid py-5">
+    <h1 class="mb-5 text-primary">Administration Dashboard</h1>
+    <hr />
+    @if (role == "Manager"){
+        <h2 class="mb-4">Key Metrics Overview</h2>
+
+        <div class="row">
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card dashboard-card bg-info text-white">
+                    <div class="card-body">
+                        <p class="card-label">Active Stays</p>
+                        <div class="card-number">@ViewBag.checkin</div>
+                        <div class="metric-spacer"></div>
+                        <small>Guests currently checked in</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card dashboard-card bg-success text-white">
+                    <div class="card-body">
+                        <p class="card-label">Rooms Available Now</p>
+                        <div class="card-number"> @ViewBag.BookingCountAv</div>
+                        <div class="metric-spacer"></div>
+                        <small>from total @ViewBag.BookingCount</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card dashboard-card bg-warning text-dark">
+                    <div class="card-body">
+                        <p class="card-label">Hotel Personnel</p>
+                        <div class="card-number">stuff number @ViewBag.StuffCount</div>
+                        <a asp-action="GetAllStuffs" class="btn btn-sm btn-outline-dark mt-2">Manage Staff</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card dashboard-card bg-danger text-white">
+                    <div class="card-body">
+                        <p class="card-label">feedbacks</p>
+                        <div class="card-number">@ViewBag.Comment</div>
+                        <a asp-action="AllComments" class="btn btn-sm btn-outline-light mt-2">Review All Comments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (role == "Reciption"){
+        <h2 class="mt-5 mb-4">Recent Bookings Activity</h2>
+
+        <div class="mb-3">
+            <a class="btn btn-success" asp-action="CreateBooking" asp-controller="Admin" method="get">Add Booking</a>
+        </div>
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Latest Booking Transactions</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Booking Date</th>
+                            <th>Check Out Date</th>
+                            <th>Status</th>
+                            <th>Total Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            var today = DateTime.Today;
+                            foreach (var booking in Model.OrderByDescending(b => b.checkInTime).Take(10))
+                            {
+                                <tr>
+                                    <td>@booking.Id</td>
+                                    <td>@booking.checkInTime.ToShortDateString()</td>
+                                    <td>@(booking.checkOutTime != null ? booking.checkOutTime.Date.ToShortDateString() : "-")</td>
+                                    <td>
+                                        @{
+                                            string badgeClass;
+                                            string badgeText;
+
+                                            if (booking.IsCheckedOut)
+                                            {
+                                                badgeClass = "bg-info";
+                                                badgeText = "Completed";
+                                            }
+                                            else if (booking.IsCheckedIn)
+                                            {
+                                                badgeClass = "bg-warning text-dark";
+                                                badgeText = "Active Stay";
+                                            }
+                                            else if (booking.checkInTime < today)
+                                            {
+                                                badgeClass = "bg-danger";
+                                                badgeText = "Expired";
+                                            }
+                                            else
+                                            {
+                                                badgeClass = "bg-secondary";
+                                                badgeText = "Pending";
+                                            }
+                                        }
+                                        <span class="badge @badgeClass">@badgeText</span>
+                                    </td>
+                                    <td>
+                                        @{
+                                            string totalPriceDisplay = (booking.TotalPrice > 0) ? booking.TotalPrice.ToString("C") : "-";
+                                        }
+                                        @totalPriceDisplay
+                                    </td>
+                                    <td>
+                                        @* CheckIn يظهر فقط إذا كان Pending وغير Expired *@
+                                        @if (!booking.IsCheckedIn && !booking.IsCheckedOut && booking.checkInTime >= today)
+                                        {
+                                            <form asp-action="CheckIn" method="post" class="d-inline">
+                                                <input type="hidden" name="bookingId" value="@booking.Id" />
+                                                <button type="submit" class="btn btn-sm btn-success">Check In</button>
+                                            </form>
+                                        }
+
+                                        @* CheckOut يظهر فقط إذا كان Active Stay *@
+                                        @if (booking.IsCheckedIn && !booking.IsCheckedOut)
+                                        {
+                                            <form asp-action="CheckOut" method="post" class="d-inline">
+                                                <input type="hidden" name="bookingId" value="@booking.Id" />
+                                                <button type="submit" class="btn btn-sm btn-danger">Check Out</button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">No bookings to show</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+</div>

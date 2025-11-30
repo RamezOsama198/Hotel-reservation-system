@@ -6,8 +6,10 @@ namespace HotelBooking.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IGenaricRepository<Booking> Bookings { get; }
-        IGenaricRepository<Room> Rooms { get; }
+        IRoomRepository Rooms { get; }
         IGenaricRepository<Stuff> Stuffs { get; }
         IGenaricRepository<Comment> Comments { get; }
+        IClientRepository Clients { get; }
+        IGenaricRepository<Admin> Admins { get; }
     }
 }

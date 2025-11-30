@@ -18,112 +18,46 @@ namespace HotelBooking.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        //// Client Dashboard (Upcoming bookings)
-        //public async Task<IActionResult> Index()
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
+        public async Task<IActionResult> Index()
+        {
 
-        //    var bookings = await _context.Bookings
-        //        .Where(b => b.ClientId == user.Id)
-        //        .Include(b => b.rooms)
-        //        .OrderByDescending(b => b.CheckInDate)
-        //        .ToListAsync();
+            if (!User.Identity.IsAuthenticated)
+            {
 
-        //    return View(bookings);
-        //}
+                return View();
+            }
 
-        //// Show available rooms
-        //public async Task<IActionResult> Rooms()
-        //{
-        //    var rooms = await _context.Rooms
-        //        .Where(r => r.IsAvailability == true)
-        //        .ToListAsync();
 
-        //    return View(rooms);
-        //}
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return View();
 
-        //// GET: Make reservation
-        //public async Task<IActionResult> Book(int roomId)
-        //{
-        //    var room = await _context.Rooms.FindAsync(roomId);
-        //    if (room == null) return NotFound();
 
-        //    return View(room);
-        //}
+            var client = _unitOfWork.Clients.GetAll()
+                            .FirstOrDefault(c => c.UserId == currentUser.Id);
+            if (client == null)
+                return View(); 
 
-        //// POST: Make reservation
-        //[HttpPost]
-        //public async Task<IActionResult> Book(int roomId, DateTime checkIn, DateTime checkOut)
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
 
-        //    var room = await _context.Rooms.FindAsync(roomId);
-        //    if (room == null) return NotFound();
+            var booking = _unitOfWork.Bookings.GetAll()
+                            .FirstOrDefault(b => b.ClientId == client.UserId);
 
-        //    var booking = new Booking
-        //    {
-        //        RoomId = roomId,
-        //        Id = user.Id,
-        //        checkInTime = checkIn,
-        //        checkOutTime = checkOut,
-        //        IsCheckedIn = false,
-        //        IsCheckedOut = false
-        //    };
 
-        //    _context.Bookings.Add(booking);
-        //    await _context.SaveChangesAsync();
+            return View(booking);
+        }
 
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost]
+        public IActionResult AddComment(Comment comment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(comment);
+            }
 
-        //// View my bookings
-        //public async Task<IActionResult> MyBookings()
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
+            _unitOfWork.Comments.Insert(comment);
 
-        //    var bookings = await _context.Bookings
-        //        .Where(b => b.Id == user.Id)
-        //        .Include(b => b.Room)
-        //        .ToListAsync();
-
-        //    return View(bookings);
-        //}
-
-        //// Cancel a reservation
-        //[HttpPost]
-        //public async Task<IActionResult> CancelBooking(int id)
-        //{
-        //    var booking = await _context.Bookings.FindAsync(id);
-        //    if (booking == null) return NotFound();
-
-        //    var user = await _userManager.GetUserAsync(User);
-        //    if (booking.UserId != user.Id) return Unauthorized();
-
-        //    _context.Bookings.Remove(booking);
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToAction("MyBookings");
-        //}
-
-        //// View profile
-        //public async Task<IActionResult> Profile()
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
-        //    return View(user);
-        //}
-
-        //// Update profile
-        //[HttpPost]
-        //public async Task<IActionResult> Profile(User updatedUser)
-        //{
-        //    var user = await _userManager.GetUserAsync(User);
-
-        //    user.Name = updatedUser.Name;
-        //    user.PhoneNumber = updatedUser.PhoneNumber;
-
-        //    await _userManager.UpdateAsync(user);
-
-        //    return RedirectToAction("Profile");
-        //}
+            TempData["msg"] = "Comment sent successfully!";
+            return RedirectToAction("AddComment");
+        }
     }
 }

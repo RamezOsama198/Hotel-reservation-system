@@ -14,7 +14,7 @@ namespace HotelBooking.Models
         [MinLength(10,ErrorMessage ="please explain more")]
         public string Description { get; set; }
         [ForeignKey("client")]
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public Client client { get; set; }
         //for many to many
         public virtual List<Admin> Admins { get; set; } = new();

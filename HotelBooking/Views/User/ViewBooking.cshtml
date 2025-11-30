@@ -1,0 +1,104 @@
+﻿@model HotelBooking.Models.Booking
+@using HotelBooking.IServicesLayer
+@using HotelBooking.ServicesLayer
+@inject IBookingServices _bookingService
+@{
+    ViewData["Title"] = "Booking Details";
+    var booking = _bookingService.GetByIdWithRooms(Model.Id);
+}
+
+<div class="container py-5">
+    <h2 class="mb-4 text-primary">Booking Details</h2>
+
+    ```
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Thank You For The Booking</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Check-in Date:</dt>
+                <dd class="col-sm-9">@Model.checkInTime.ToShortDateString()</dd>
+
+                <dt class="col-sm-3">Check-out Date:</dt>
+                <dd class="col-sm-9">@Model.checkOutTime.ToShortDateString()</dd>
+
+                <dt class="col-sm-3">Total Guests:</dt>
+                <dd class="col-sm-9">@Model.NumberOfGuests</dd>
+
+                <dt class="col-sm-3">Total Price:</dt>
+                <dd class="col-sm-9">@Model.TotalPrice.ToString("C")</dd>
+
+                <dt class="col-sm-3">Gym Access:</dt>
+                <dd class="col-sm-9">@((Model.Gym) ? "Yes" : "No")</dd>
+
+                <dt class="col-sm-3">SPA Access:</dt>
+                <dd class="col-sm-9">@((Model.SPA) ? "Yes" : "No")</dd>
+
+                <dt class="col-sm-3">Checked In:</dt>
+                <dd class="col-sm-9">
+                    <span class="badge @(Model.IsCheckedIn ? "bg-success" : "bg-secondary")">
+                        @(Model.IsCheckedIn ? "Yes" : "No")
+                    </span>
+                </dd>
+
+                <dt class="col-sm-3">Checked Out:</dt>
+                <dd class="col-sm-9">
+                    <span class="badge @(Model.IsCheckedOut ? "bg-success" : "bg-secondary")">
+                        @(Model.IsCheckedOut ? "Yes" : "No")
+                    </span>
+                </dd>
+                <dt class="col-sm-3">Status:</dt>
+                <dd class="col-sm-9">
+                    <span>
+                        @{
+                            string badgeClass;
+                            string badgeText;
+
+                            if (Model.IsCheckedOut)
+                            {
+                                badgeClass = "bg-info";
+                                badgeText = "Completed";
+                            }
+                            else if (Model.IsCheckedIn)
+                            {
+                                badgeClass = "bg-warning text-dark";
+                                badgeText = "Active Stay";
+                            }
+                            else if (Model.checkInTime < DateTime.Today)
+                            {
+                                badgeClass = "bg-danger";
+                                badgeText = "Expired";
+                            }
+                            else
+                            {
+                                badgeClass = "bg-secondary";
+                                badgeText = "Pending";
+                            }
+                        }
+                        <span class="badge @badgeClass">@badgeText</span>
+                    </span>
+                </dd>
+            </dl>
+
+            <h5 class="mt-4">Rooms Booked:</h5>
+            <ul>
+                @if (booking.rooms != null && booking.rooms.Any())
+                {
+                    foreach (var room in booking.rooms)
+                    {
+                        <li>@room.RoomType - @room.PricePerDay.ToString("C")</li>
+                    }
+                }
+                else
+                {
+                    <li>No rooms assigned</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <a asp-action="ShowAvailableRooms" class="btn btn-outline-primary">Back to Available Rooms</a>
+    ```
+
+</div>

@@ -1,0 +1,84 @@
+﻿@model HotelBooking.ViewModel.UserVM
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h2>Edit User</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form asp-action="EditUser" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Role"></label>
+        <select id="roleSelect" asp-for="Role" asp-items="ViewBag.Roles" class="form-control"></select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+
+    <div id="adminFields" style="display:@(Model.Role == "Admin" ? "block" : "none")">
+        <div class="form-group">
+            <label asp-for="AdminRole">Admin Role</label>
+            <select asp-for="AdminRole" asp-items="ViewBag.AdminRoles" class="form-control"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Salary"></label>
+            <input asp-for="Salary" class="form-control" />
+            <span asp-validation-for="Salary" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div id="clientFields" style="display:@(Model.Role == "Client" ? "block" : "none")">
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NationalId"></label>
+            <input asp-for="NationalId" class="form-control" />
+            <span asp-validation-for="NationalId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a class="btn btn-secondary" href="@Url.Action("Dashboard")">Cancel</a>
+</form>
+
+@section Scripts {
+    <script>
+        var roleSelect = document.getElementById("roleSelect");
+        roleSelect.addEventListener("change", function () {
+            var role = this.value;
+            document.getElementById("adminFields").style.display = (role === "Admin") ? "block" : "none";
+            document.getElementById("clientFields").style.display = (role === "Client") ? "block" : "none";
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
