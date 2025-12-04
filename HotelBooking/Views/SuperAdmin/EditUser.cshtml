@@ -34,7 +34,7 @@
 
     <div class="form-group">
         <label asp-for="Role"></label>
-        <select id="roleSelect" asp-for="Role" asp-items="ViewBag.Roles" class="form-control"></select>
+        <input id="roleSelect" asp-for="Role" asp-items="ViewBag.Roles" class="form-control" readonly></input>
         <span asp-validation-for="Role" class="text-danger"></span>
     </div>
 
