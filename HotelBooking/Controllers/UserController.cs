@@ -36,12 +36,17 @@ namespace HotelBooking.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-
+            if (_unitOfWork.Clients.GetAll().Any(c => c.NationalId == model.NationalId))
+            {
+                ModelState.AddModelError("NationalId", "This National ID is already registered.");
+                return View(model);
+            }
             var user = new User
             {
                 UserName = model.Email,
                 Email = model.Email,
-                Name = model.Name
+                Name = model.Name,
+                PhoneNumber = model.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -56,7 +61,7 @@ namespace HotelBooking.Controllers
                         NationalId = model.NationalId
                     };
                     _unitOfWork.Clients.Insert(client);
-                return RedirectToAction("RegisterSuccess");
+                return RedirectToAction("Login");
             }
 
             foreach (var error in result.Errors)
@@ -65,12 +70,6 @@ namespace HotelBooking.Controllers
             }
 
             return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult RegisterSuccess()
-        {
-            return View();
         }
 
         [HttpGet]
@@ -86,12 +85,17 @@ namespace HotelBooking.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError("Email", "Email Not Found!");
+                return View(model);
+            }
             var result = await _signInManager.PasswordSignInAsync(
                 model.Email, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
                 var roles = await _userManager.GetRolesAsync(user);
 
                 if (roles.Contains("Admin"))
@@ -106,7 +110,7 @@ namespace HotelBooking.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError("Password", "Incorrect password!");
             return View();
         }
 
@@ -122,53 +126,75 @@ namespace HotelBooking.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateBooking(int id)
         {
-            var booking = _unitOfWork.Bookings.GetById(id);
+            var booking = _bookingService.GetByIdWithRooms(id);
             if (booking == null) return NotFound();
 
             var currentUser = await _userManager.GetUserAsync(User);
 
-            // if client role, ensure booking belongs to their client record
             if (User.IsInRole("Client"))
             {
                 var client = _unitOfWork.Clients.GetAll().FirstOrDefault(c => c.UserId == currentUser.Id);
-                if (client == null) return Forbid();
 
-                if (booking.ClientId != client.UserId) return Unauthorized();
+                if (client == null) return Unauthorized();
+
+                if (booking.ClientId != client.UserId)
+                    return Unauthorized();
             }
-
+            ViewBag.AllRooms = _unitOfWork.Rooms.GetAll().Where(r => r.IsAvailability || r.BookingId == booking.Id).ToList();
             return View(booking);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateBooking(Booking model)
+        public async Task<IActionResult> UpdateBooking(Booking model, List<int> SelectedRoomsIds)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (SelectedRoomsIds == null || !SelectedRoomsIds.Any())
+            {
+                ModelState.AddModelError("", "You must select at least one room.");
+                ViewBag.AllRooms = _unitOfWork.Rooms.GetAll().Where(r => r.IsAvailability || r.BookingId == model.Id).ToList();
+                return View(model);
+            }
+            if (!ModelState.IsValid)
+            {
+                ViewBag.AllRooms = _unitOfWork.Rooms.GetAll().Where(r => r.IsAvailability || r.BookingId == model.Id).ToList();
+                return View(model);
+            }
+            var selectedRooms = _unitOfWork.Rooms.GetAll().Where(r => SelectedRoomsIds.Contains(r.Id)).ToList();
+            int totalMaxPeople = selectedRooms.Sum(r => r.MaxPeople);
+            if (model.NumberOfGuests > totalMaxPeople)
+            {
+                ModelState.AddModelError("NumberOfGuests", $"Number of guests cannot exceed {totalMaxPeople}, based on selected rooms.");
+                ViewBag.AllRooms = _unitOfWork.Rooms.GetAll().Where(r => r.IsAvailability || r.BookingId == model.Id).ToList();
+                return View(model);
+            }
+
+
+            if (model.checkInTime > DateTime.Today.AddDays(7))
+            {
+                ModelState.AddModelError("checkInTime", "Check-in date cannot be more than 7 days from checkInTime.");
+                ViewBag.AllRooms = _unitOfWork.Rooms.GetAll().Where(r => r.IsAvailability || r.BookingId == model.Id).ToList();
+                return View(model);
+            }
 
             var booking = _unitOfWork.Bookings.GetById(model.Id);
             if (booking == null) return NotFound();
 
             var currentUser = await _userManager.GetUserAsync(User);
+
             if (User.IsInRole("Client"))
             {
-                var client = _unitOfWork.Clients.GetAll().FirstOrDefault(c => c.UserId == currentUser.Id);
-                if (client == null) return Forbid();
+                var client = _unitOfWork.Clients.GetAll()
+                                .FirstOrDefault(c => c.UserId == currentUser.Id);
 
+                if (client == null) return Unauthorized();
                 if (booking.ClientId != client.UserId) return Unauthorized();
             }
 
-            // update allowed fields
-            booking.checkInTime = model.checkInTime;
-            booking.checkOutTime = model.checkOutTime;
-            booking.TotalPrice = model.TotalPrice;
-            booking.Gym = model.Gym;
-            booking.SPA = model.SPA;
-
-            _unitOfWork.Bookings.Update(booking);
+  
+            _bookingService.UpdateBooking(model, SelectedRoomsIds);
 
             TempData["Success"] = "Booking updated successfully!";
-            // redirect depending on role
             return RedirectToRoleHome();
         }
 
@@ -187,6 +213,13 @@ namespace HotelBooking.Controllers
 
                 if (booking.ClientId != client.UserId) return Unauthorized();
             }
+            var rooms = _unitOfWork.Rooms.GetAll().Where(r => r.BookingId == booking.Id).ToList();
+            foreach (var room in rooms)
+            {
+                room.BookingId = null;
+                room.IsAvailability = true;
+                _unitOfWork.Rooms.Update(room);
+            }
 
             _unitOfWork.Bookings.Delete(id);
 
@@ -199,9 +232,9 @@ namespace HotelBooking.Controllers
         private IActionResult RedirectToRoleHome()
         {
             if (User.IsInRole("Admin"))
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Dashboard", "Admin");
 
-            return RedirectToAction("Index", "Client");
+            return RedirectToAction("MyBookings", "Client");
         }
         //====================================================================================================================//
         [HttpGet]
@@ -243,12 +276,19 @@ namespace HotelBooking.Controllers
                 ViewBag.AvailableRooms = availableRooms;
                 return View(booking);
             }
+            var selectedRooms = _unitOfWork.Rooms.GetAll().Where(r => roomIds.Contains(r.Id)).ToList();
+            int totalMaxPeople = selectedRooms.Sum(r => r.MaxPeople);
+            if (booking.NumberOfGuests > totalMaxPeople)
+            {
+                ModelState.AddModelError("NumberOfGuests", $"Number of guests cannot exceed {totalMaxPeople}, based on selected rooms.");
+                ViewBag.AvailableRooms = _unitOfWork.Rooms.GetAvailableRooms();
+                return View(booking);
+            }
 
-            
 
             if (booking.checkInTime > DateTime.Now.AddDays(7))
             {
-                ModelState.AddModelError("", "Check-in date cannot be more than 7 days from today.");
+                ModelState.AddModelError("checkInTime", "Check-in date cannot be more than 7 days from today.");
                 var availableRooms = _unitOfWork.Rooms.GetAvailableRooms();
                 ViewBag.AvailableRooms = availableRooms;
                 return View(booking);
@@ -292,11 +332,25 @@ namespace HotelBooking.Controllers
         [HttpGet]
         public IActionResult ViewBooking(int id)
         {
-            var booking = _unitOfWork.Bookings.GetById(id);
+            var booking = _bookingService.GetByIdWithRooms(id);
             if (booking == null)
                 return NotFound();
-
-            return View(booking);
+            var bookingVM = new BookingDetailsVM
+            {
+                Id = booking.Id,
+                checkInTime = booking.checkInTime,
+                checkOutTime = booking.checkOutTime,
+                NumberOfGuests = booking.NumberOfGuests,
+                TotalPrice = booking.TotalPrice,
+                Gym = booking.Gym,
+                SPA = booking.SPA,
+                IsCheckedIn = booking.IsCheckedIn,
+                IsCheckedOut = booking.IsCheckedOut,
+                ClientName = booking.client?.User?.Name ?? "UnKnown",
+                ClientNationalId = booking.client?.NationalId ?? "UnKnown",
+                Rooms = booking.rooms
+            };
+            return View(bookingVM);
         }
 
 

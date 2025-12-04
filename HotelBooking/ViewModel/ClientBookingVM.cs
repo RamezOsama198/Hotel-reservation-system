@@ -29,7 +29,8 @@ namespace HotelBooking.ViewModel
         [StringLength(100, MinimumLength = 5)]
         public string Address { get; set; }
         [Required]
-        [StringLength(14, MinimumLength = 14, ErrorMessage = "NationalId in Egypt Must be 14 Number")]
+        [StringLength(14, MinimumLength = 14)]
+        [RegularExpression("^[0-9]{14}$", ErrorMessage = "National ID must be 14 digits.")]
         public string NationalId { get; set; }
         [Required]
         [RegularExpression(@"^01[0-9]{9}$", ErrorMessage = "Invalid phone number")]
@@ -41,7 +42,8 @@ namespace HotelBooking.ViewModel
 
         [Required]
         public DateTime CheckOutTime { get; set; }
-
+        [Required]
+        public int NumberOfGuests { get; set; }
         public bool Gym { get; set; }
         public bool SPA { get; set; }
 

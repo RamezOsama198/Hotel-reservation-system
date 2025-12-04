@@ -1,5 +1,6 @@
 ﻿@using HotelBooking.Models
-@model IEnumerable<Comment>
+@using HotelBooking.ViewModel
+@model IEnumerable<CommentVM>
 
 @{
     ViewData["Title"] = "Customer Comments";
@@ -25,11 +26,10 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Client</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @if (Model != null && Model.Any())
+            @if (Model != null)
             {
                 foreach (var comment in Model)
                 {
@@ -37,21 +37,7 @@
                         <td>@comment.Id</td>
                         <td>@comment.Title</td>
                         <td>@comment.Description</td>
-                        <td>@comment.ClientId</td>
-                        <td>
-                            <a asp-action="ViewComment" asp-route-id="@comment.Id"
-                               class="btn btn-sm" style="background-color:black; color:yellow;">
-                                Details
-                            </a>
-                            <a asp-action="EditComment" asp-route-id="@comment.Id"
-                               class="btn btn-sm" style="background-color:yellow; color:black;">
-                                Edit
-                            </a>
-                            <a asp-action="DeleteComment" asp-route-id="@comment.Id"
-                               class="btn btn-sm" style="background-color:black; color:yellow;">
-                                Delete
-                            </a>
-                        </td>
+                        <td>@comment.ClientName</td>
                     </tr>
                 }
             }
@@ -65,3 +51,4 @@
     </table>
 </div>
 
+<a asp-action="Dashboard" class="btn btn-secondary mt-3">Back</a>

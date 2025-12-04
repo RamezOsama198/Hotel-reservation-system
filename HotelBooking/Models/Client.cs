@@ -15,6 +15,7 @@ namespace HotelBooking.Models
 
         [Required]
         [StringLength(14, MinimumLength = 14)]
+        [RegularExpression("^[0-9]{14}$", ErrorMessage = "National ID must be 14 digits.")]
         public string NationalId { get; set; }
 
         public virtual List<Comment> comments { get; set; } = new();

@@ -11,5 +11,6 @@ namespace HotelBooking.IRepository
         public void Delete(int id);
         public void Delete(string id);
         public TableModel GetById(string id);
+        public void Attach(TableModel model);
     }
 }

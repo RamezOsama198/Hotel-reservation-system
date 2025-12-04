@@ -1,0 +1,173 @@
+﻿@model HotelBooking.Models.Booking
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Update Booking";
+    var currentUser = UserManager.GetUserAsync(User).Result;
+    var isClient = User.IsInRole("Client");
+    var isAdmin = User.IsInRole("Admin");
+}
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white py-3 rounded-top-4">
+            <h3 class="mb-0">
+                <i class="bi bi-pencil-square me-2"></i> Update Booking
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+
+            <form asp-action="UpdateBooking" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <!-- Dates -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label  asp-for="checkInTime" class="form-label fw-bold">Check-in Date</label>
+                        <input id ="CheckIn" asp-for="checkInTime" type="date" class="form-control form-control-lg" required />
+                        <span asp-validation-for="checkInTime" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label  asp-for="checkOutTime" class="form-label fw-bold">Check-out Date</label>
+                        <input id="CheckOut" asp-for="checkOutTime" type="date" class="form-control form-control-lg" required />
+                        <span asp-validation-for="checkOutTime" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Guests -->
+                <div class="mb-3">
+                    <label asp-for="NumberOfGuests" class="form-label fw-bold">Number of Guests</label>
+                    <input asp-for="NumberOfGuests" class="form-control form-control-lg" type="number" min="1" required />
+                    <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                </div>
+
+                <!-- Total Price (Read-only) -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Total Price</label>
+                    <input asp-for="TotalPrice"
+                           class="form-control form-control-lg bg-light"
+                           readonly
+                           style="font-weight:700;" />
+                </div>
+
+                <!-- Extra Services -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-check form-switch">
+                            <input asp-for="Gym" class="form-check-input fs-4" type="checkbox" />
+                            <label asp-for="Gym" class="form-check-label fs-5">Gym Access</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-check form-switch">
+                            <input asp-for="SPA" class="form-check-input fs-4" type="checkbox" />
+                            <label asp-for="SPA" class="form-check-label fs-5">SPA Access</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROOMS SECTION -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold fs-5">Rooms</label>
+                    <label class="form-label">Select Rooms</label>
+                    <input type="text" id="roomSearch" class="form-control mb-2" placeholder="Search rooms..." />
+                    <div id="roomsContainer" class="border rounded p-3" style="max-height: 260px; overflow-y: auto;">
+                        @foreach (var room in (List<HotelBooking.Models.Room>)ViewBag.AllRooms)
+                        {
+                            <div class="form-check room-item mb-2">
+                                <input type="checkbox"
+                                        name="SelectedRoomsIds"
+                                        class="form-check-input"
+                                        value="@room.Id"
+                                        @(Model.rooms != null && Model.rooms.Any(r => r.Id == room.Id) ? "checked" : "") />
+
+                                <label class="form-check-label">
+                                    <strong>@room.Id</strong> - @room.RoomType | Price: @room.PricePerDay.ToString("C") | Max People: @room.MaxPeople
+                                    <span class="badge @(room.IsAvailability ? "bg-success" : "bg-danger") ms-2">
+                                        @(room.IsAvailability ? "Available" : "Assigned")
+                                    </span>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    @if (isAdmin)
+                    {
+                        <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary btn-lg px-4">
+                            <i class="bi bi-arrow-left me-1"></i> Cancel
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Client" asp-action="MyBookings" class="btn btn-secondary btn-lg px-4">
+                            <i class="bi bi-arrow-left me-1"></i> Cancel
+                        </a>
+                    }
+                    <button type="submit" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-check-circle me-1"></i> Save Changes
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<script>
+    const searchBox = document.getElementById("roomSearch");
+    const roomItems = document.querySelectorAll(".room-item");
+
+    searchBox.addEventListener("input", function () {
+        const value = this.value.toLowerCase();
+        roomItems.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            item.style.display = text.includes(value) ? "block" : "none";
+        });
+    });
+</script>
+<script>
+    const checkInInput = document.getElementById('CheckIn');
+    const checkOutInput = document.getElementById('CheckOut');
+    if (checkInInput.value) {
+        checkOutInput.min = checkInInput.value;
+    }
+
+    checkInInput.addEventListener('change', () => {
+        checkOutInput.min = checkInInput.value;
+    });
+
+
+    const form = checkInInput.closest('form');
+    form.addEventListener('submit', (e) => {
+        if (checkOutInput.value < checkInInput.value) {
+            alert("Check-out date must be greater than or equal to Check-in date.");
+            e.preventDefault();
+        }
+    });
+</script>

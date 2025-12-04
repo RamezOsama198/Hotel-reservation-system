@@ -1,0 +1,30 @@
+﻿@model HotelBooking.Models.Room
+
+<div class="container py-4">
+    <h2 class="mb-3">Staff Details</h2>
+
+    <div class="card shadow-sm p-3">
+        <p><strong>ID:</strong> @Model.Id</p>
+        <p><strong>RoomType:</strong> @Model.RoomType</p>
+        <p><strong>MaxPeople:</strong> @Model.MaxPeople</p>
+        <p><strong>IsAvailability:</strong> @Model.IsAvailability</p>
+        <p><strong>PricePerDay:</strong> @Model.PricePerDay.ToString("C")</p>
+
+        <h4>Assigned Stuffs:</h4>
+        @if (Model.Stuffs != null && Model.Stuffs.Any())
+        {
+            <ul>
+                @foreach (var stuff in Model.Stuffs)
+                {
+                    <li><b>Stuff #</b>@stuff.Id - <b>Name #</b>@stuff.Name - <b>Phone #</b>@stuff.Phone - <b>Salary #</b>@stuff.Salary.ToString("C") - <b>JopTitle </b>@stuff.JopTitle - <b>Gender </b>@stuff.Gender</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No stuffs assigned.</p>
+        }
+    </div>
+
+    <a asp-action="GetAllRooms" class="btn btn-secondary mt-3">Back</a>
+</div>

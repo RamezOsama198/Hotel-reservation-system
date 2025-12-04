@@ -8,22 +8,22 @@ namespace HotelBooking.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        [StringLength(3)]
+        [StringLength(50)]
+        [MinLength(3)]
         public string Name { get; set; }
         [Required]
+        [RegularExpression(@"^01[0-9]{9}$", ErrorMessage = "Invalid phone number")]
         public string Phone { get; set; }
         [Required]
         [Range(1000,50000)]
         public double Salary { get; set; }
         [Required]
+        [StringLength(50)]
         public string JopTitle { get; set; }
         [Required]
         public string Gender { get; set; }
-        [ForeignKey("admin")]
-        public string AdminId { get; set; }
-        public Admin admin { get; set; }
         //for many to many
-        public List<Room> Rooms { get; set; }
+        public List<Room> Rooms { get; set; } = new List<Room>();
 
     }
 }

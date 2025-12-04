@@ -1,22 +1,34 @@
-﻿@model HotelBooking.Models.Booking
-@using HotelBooking.IServicesLayer
-@using HotelBooking.ServicesLayer
-@inject IBookingServices _bookingService
+﻿@using Microsoft.AspNetCore.Identity
+@model HotelBooking.ViewModel.BookingDetailsVM
+@inject UserManager<HotelBooking.Models.User> _userManager
 @{
-    ViewData["Title"] = "Booking Details";
-    var booking = _bookingService.GetByIdWithRooms(Model.Id);
+    var title = "View Booking Details";
+    ViewData["Title"] = title;
+    var currentUser = _userManager.GetUserAsync(User).Result;
+    var currentUserRole = _userManager.GetRolesAsync(currentUser).Result.FirstOrDefault() ?? "Unknown";
 }
-
 <div class="container py-5">
     <h2 class="mb-4 text-primary">Booking Details</h2>
 
-    ```
     <div class="card shadow mb-4">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Thank You For The Booking</h4>
+            @if (currentUserRole == "Client")
+            {
+                <h4 class="mb-0">Thank You For The Booking</h4>
+            }
+            else if (currentUserRole == "Admin")
+            {
+                <h4 class="mb-0">Booking #@Model.Id</h4>
+            }
         </div>
         <div class="card-body">
             <dl class="row">
+                <dt class="col-sm-3">Client Name:</dt>
+                <dd class="col-sm-9">@Model.ClientName</dd>
+
+                <dt class="col-sm-3">Client NationalId:</dt>
+                <dd class="col-sm-9">@Model.ClientNationalId</dd>
+
                 <dt class="col-sm-3">Check-in Date:</dt>
                 <dd class="col-sm-9">@Model.checkInTime.ToShortDateString()</dd>
 
@@ -48,44 +60,43 @@
                         @(Model.IsCheckedOut ? "Yes" : "No")
                     </span>
                 </dd>
+
                 <dt class="col-sm-3">Status:</dt>
                 <dd class="col-sm-9">
-                    <span>
-                        @{
-                            string badgeClass;
-                            string badgeText;
+                    @{
+                        string badgeClass;
+                        string badgeText;
 
-                            if (Model.IsCheckedOut)
-                            {
-                                badgeClass = "bg-info";
-                                badgeText = "Completed";
-                            }
-                            else if (Model.IsCheckedIn)
-                            {
-                                badgeClass = "bg-warning text-dark";
-                                badgeText = "Active Stay";
-                            }
-                            else if (Model.checkInTime < DateTime.Today)
-                            {
-                                badgeClass = "bg-danger";
-                                badgeText = "Expired";
-                            }
-                            else
-                            {
-                                badgeClass = "bg-secondary";
-                                badgeText = "Pending";
-                            }
+                        if (Model.IsCheckedOut)
+                        {
+                            badgeClass = "bg-info";
+                            badgeText = "Completed";
                         }
-                        <span class="badge @badgeClass">@badgeText</span>
-                    </span>
+                        else if (Model.IsCheckedIn)
+                        {
+                            badgeClass = "bg-warning text-dark";
+                            badgeText = "Active Stay";
+                        }
+                        else if (Model.checkInTime < DateTime.Today)
+                        {
+                            badgeClass = "bg-danger";
+                            badgeText = "Expired";
+                        }
+                        else
+                        {
+                            badgeClass = "bg-secondary";
+                            badgeText = "Pending";
+                        }
+                    }
+                    <span class="badge @badgeClass">@badgeText</span>
                 </dd>
             </dl>
 
             <h5 class="mt-4">Rooms Booked:</h5>
             <ul>
-                @if (booking.rooms != null && booking.rooms.Any())
+                @if (Model.Rooms != null && Model.Rooms.Any())
                 {
-                    foreach (var room in booking.rooms)
+                    foreach (var room in Model.Rooms)
                     {
                         <li>@room.RoomType - @room.PricePerDay.ToString("C")</li>
                     }
@@ -97,8 +108,12 @@
             </ul>
         </div>
     </div>
-
-    <a asp-action="ShowAvailableRooms" class="btn btn-outline-primary">Back to Available Rooms</a>
-    ```
-
+    @if (currentUserRole == "Client")
+    {
+        <a asp-action="ShowAvailableRooms" class="btn btn-outline-primary">Back to Available Rooms</a>
+    }
+    else if (currentUserRole == "Admin")
+    {
+        <a asp-action="Dashboard" asp-controller="Admin" class="btn btn-outline-primary">Back</a>
+    }
 </div>

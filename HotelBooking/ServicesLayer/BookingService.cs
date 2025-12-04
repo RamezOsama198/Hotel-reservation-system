@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Interfaces;
 using HotelBooking.IServicesLayer;
 using HotelBooking.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.ServicesLayer
@@ -8,9 +9,11 @@ namespace HotelBooking.ServicesLayer
     public class BookingService : IBookingServices
     {
         private readonly IUnitOfWork _unitOfWork;
-        public BookingService(IUnitOfWork unitOfWork)
+        private readonly UserManager<User> _userManager;
+        public BookingService(IUnitOfWork unitOfWork, UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public double CalculateTotalPrice(Booking booking, List<int> roomIds)
@@ -84,9 +87,62 @@ namespace HotelBooking.ServicesLayer
                 booking.rooms = _unitOfWork.Rooms.GetAll()
                     .Where(r => r.BookingId == booking.Id)
                     .ToList();
+
+                if (!string.IsNullOrEmpty(booking.ClientId))
+                {
+                    booking.client = _unitOfWork.Clients.GetById(booking.ClientId);
+                    if (booking.client != null)
+                    {
+                        booking.client.User = _userManager.Users
+                            .FirstOrDefault(u => u.Id == booking.client.UserId);
+                    }
+                }
             }
 
             return booking;
+        }
+
+        public void UpdateBooking(Booking booking, List<int> newRoomIds)
+        {
+            if (booking == null)
+            {
+                return;
+            }
+
+            var oldBooking = _unitOfWork.Bookings.GetById(booking.Id);
+            if (oldBooking == null)
+            {
+                return;
+            }
+
+            var oldRooms = _unitOfWork.Rooms.GetAll().Where(r => r.BookingId == booking.Id).ToList();
+
+            foreach (var room in oldRooms)
+            {
+                room.IsAvailability = true;
+                room.BookingId = null;
+                _unitOfWork.Rooms.Update(room);
+            }
+
+            oldBooking.checkInTime = booking.checkInTime;
+            oldBooking.checkOutTime = booking.checkOutTime;
+            oldBooking.Gym = booking.Gym;
+            oldBooking.SPA = booking.SPA;
+            oldBooking.NumberOfGuests = booking.NumberOfGuests;
+            oldBooking.TotalPrice = CalculateTotalPrice(oldBooking, newRoomIds);
+
+            _unitOfWork.Bookings.Update(oldBooking);
+
+            foreach (var roomId in newRoomIds)
+            {
+                var room = _unitOfWork.Rooms.GetById(roomId);
+                if (room != null)
+                {
+                    room.IsAvailability = false;
+                    room.BookingId = oldBooking.Id;
+                    _unitOfWork.Rooms.Update(room);
+                }
+            }
         }
     }
 

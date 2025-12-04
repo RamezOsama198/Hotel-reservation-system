@@ -28,8 +28,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQm9va2luZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/CreateBookingForClient.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQm9va2luZ0ZvckNsaWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/CreateStuff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlU3R1ZmYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/EditStuff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFN0dWZmLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/GetAllRooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2V0QWxsUm9vbXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/GetAllStuffs.cshtml]
@@ -40,12 +56,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/RoomDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9vbURldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/StuffDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZmZEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Admin/Users.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Client/MyBookings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XE15Qm9va2luZ3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Client/SendComment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFNlbmRDb21tZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/Home/Index.cshtml]
@@ -92,12 +124,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/User/RegisterSuccess.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3RlclN1Y2Nlc3MuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/User/ShowAvailableRooms.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaG93QXZhaWxhYmxlUm9vbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/User/UpdateBooking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVcGRhdGVCb29raW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DEPI_Project/Hotel-reservation-system/HotelBooking/Views/User/ViewBooking.cshtml]

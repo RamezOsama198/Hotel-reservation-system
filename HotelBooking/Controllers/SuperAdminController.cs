@@ -117,7 +117,32 @@ public class SuperAdminController : Controller
 
         var client = _unitOfWork.Clients.GetAll().FirstOrDefault(c => c.UserId == id);
         if (client != null)
+        {
+            var bookings = _unitOfWork.Bookings.GetAll().Where(b => b.ClientId == client.UserId).ToList();
+            foreach (var booking in bookings)
+            {
+                var rooms = _unitOfWork.Rooms.GetAll().Where(r => r.BookingId == booking.Id).ToList();
+
+                foreach (var room in rooms)
+                {
+                    room.IsAvailability = true;
+                    room.BookingId = null;
+                    _unitOfWork.Rooms.Update(room);
+                }
+                _unitOfWork.Bookings.Delete(booking.Id);
+            }
+
+            var comments = _unitOfWork.Comments.GetAll()
+                         .Where(c => c.ClientId == client.UserId)
+                         .ToList();
+
+            foreach (var comment in comments)
+            {
+                _unitOfWork.Comments.Delete(comment.Id);
+            }
+
             _unitOfWork.Clients.Delete(client.UserId);
+        }
 
         await _userManager.DeleteAsync(user);
 
@@ -185,6 +210,10 @@ public class SuperAdminController : Controller
                 ModelState.AddModelError("Address", "Address is required for clients.");
             if (string.IsNullOrWhiteSpace(model.NationalId))
                 ModelState.AddModelError("NationalId", "National ID is required for clients.");
+            if (_unitOfWork.Clients.GetAll().Any(c => c.NationalId == model.NationalId && c.UserId != model.Id))
+            {
+                ModelState.AddModelError("NationalId", "This National ID is already registered.");
+            }
         }
         
         if (model.Role == "Admin")

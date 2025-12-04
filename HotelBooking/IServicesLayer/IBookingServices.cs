@@ -8,5 +8,6 @@ namespace HotelBooking.IServicesLayer
         void ExpireOldBookings();
         void CreateBooking(Models.Booking booking, List<int> roomIds);
         public Booking GetByIdWithRooms(int id);
+        public void UpdateBooking(Booking booking, List<int> newRoomIds);
     }
 }

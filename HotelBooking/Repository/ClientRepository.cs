@@ -6,10 +6,14 @@ namespace HotelBooking.Repository
 {
     public class ClientRepository : GenaricRepository<Client>, IClientRepository
     {
-        public ClientRepository(HotelDbContext hotelDbContext) : base(hotelDbContext) { }
+        private readonly HotelDbContext _context;
+        public ClientRepository(HotelDbContext hotelDbContext) : base(hotelDbContext) 
+        {
+            _context = hotelDbContext;
+        }
         public Client GetByNationalId(string nationalId)
         {
-            var client = GetAll().FirstOrDefault(c => c.NationalId == nationalId);
+            var client = _context.Clients.Include(c => c.User).FirstOrDefault(c => c.NationalId == nationalId.Trim());
             return client;
         }
     }

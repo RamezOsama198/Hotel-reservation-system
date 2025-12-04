@@ -72,15 +72,21 @@
     <div class="row">
         <div class="col-md-6 mb-3">
             <label class="form-label">Check-In Date</label>
-            <input asp-for="CheckInTime" type="date" class="form-control" />
+            <input id="CheckIn" asp-for="CheckInTime" type="date" class="form-control" />
             <span asp-validation-for="CheckInTime" class="text-danger"></span>
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">Check-Out Date</label>
-            <input asp-for="CheckOutTime" type="date" class="form-control" />
+            <input id="CheckOut" asp-for="CheckOutTime" type="date" class="form-control" />
             <span asp-validation-for="CheckOutTime" class="text-danger"></span>
         </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NumberOfGuests" class="form-label"></label>
+        <input asp-for="NumberOfGuests" class="form-control" type="number" min="1" />
+        <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
     </div>
 
     <div class="mb-3 form-check">
@@ -111,8 +117,7 @@
                            id="room_@room.Id" />
 
                     <label class="form-check-label" for="room_@room.Id">
-                        <strong>@room.Id</strong> - @room.RoomType
-                        | Price: @room.PricePerDay
+                        <strong>@room.Id</strong> - @room.RoomType | Price: @room.PricePerDay.ToString("C") | Max People: @room.MaxPeople
                     </label>
                 </div>
             }
@@ -122,6 +127,7 @@
     </div>
 
     <button class="btn btn-primary" type="submit">Create Booking</button>
+    <a asp-action="Dashboard" class="btn btn-secondary mx-2">Cancel</a>
 </form>
 
 @section Scripts {
@@ -137,5 +143,23 @@
             const text = item.innerText.toLowerCase();
             item.style.display = text.includes(value) ? "block" : "none";
         });
+    });
+</script>
+<script>
+    const checkInInput = document.getElementById('CheckIn');
+    const checkOutInput = document.getElementById('CheckOut');
+    const today = new Date().toISOString().split('T')[0];
+    checkInInput.min = today;
+    checkInInput.addEventListener('change', () => {
+        const checkInDate = checkInInput.value;
+        checkOutInput.min = checkInDate;
+    });
+
+    const form = checkInInput.closest('form');
+    form.addEventListener('submit', (e) => {
+        if (checkOutInput.value < checkInInput.value) {
+            alert("Check-out date must be greater than or equal to Check-in date.");
+            e.preventDefault();
+        }
     });
 </script>

@@ -24,8 +24,6 @@ namespace HotelBooking.Models
         public bool IsCheckedOut { get; set; }
         public bool IsExpired { get; set; } = false;
         public virtual List<Room>? rooms { get; set; }
-        //for many to many
-        public virtual List<Admin> Admins { get; set; } = new();
 
     }
 }

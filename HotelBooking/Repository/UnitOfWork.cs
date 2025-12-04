@@ -12,7 +12,7 @@ namespace HotelBooking.Services
 
         public IGenaricRepository<Booking> Bookings { get; private set; }
         public IRoomRepository Rooms { get; private set; }
-        public IGenaricRepository<Stuff> Stuffs { get; private set; }
+        public IStuffRepository Stuffs { get; private set; }
         public IGenaricRepository<Comment> Comments { get; private set; }
         public IClientRepository Clients { get; private set; }
         public IGenaricRepository<Admin> Admins { get; private set; }
@@ -22,7 +22,7 @@ namespace HotelBooking.Services
 
             Bookings = new GenaricRepository<Booking>(context);
             Rooms = new RoomRepository(context);
-            Stuffs = new GenaricRepository<Stuff>(context);
+            Stuffs = new StuffRepository(context);
             Comments = new GenaricRepository<Comment>(context);
             Clients = new ClientRepository(context);
             Admins = new GenaricRepository<Admin>(context);

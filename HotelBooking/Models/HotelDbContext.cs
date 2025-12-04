@@ -17,6 +17,10 @@ namespace HotelBooking.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            // Unique NationalId for Client
+            modelBuilder.Entity<Client>()
+                .HasIndex(c => c.NationalId)
+                .IsUnique();
 
             // 1-to-1 with Identity User
             modelBuilder.Entity<Client>()
@@ -32,13 +36,6 @@ namespace HotelBooking.Models
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Many-to-many
-            modelBuilder.Entity<Admin>()
-                .HasMany(b => b.Bookings)
-                .WithMany(a => a.Admins);
-
-            modelBuilder.Entity<Comment>()
-                .HasMany(a => a.Admins)
-                .WithMany(c => c.Comments);
 
             modelBuilder.Entity<Stuff>()
                 .HasMany(r => r.Rooms)

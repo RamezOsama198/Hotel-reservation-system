@@ -7,7 +7,7 @@ namespace HotelBooking.Interfaces
     {
         IGenaricRepository<Booking> Bookings { get; }
         IRoomRepository Rooms { get; }
-        IGenaricRepository<Stuff> Stuffs { get; }
+        IStuffRepository Stuffs { get; }
         IGenaricRepository<Comment> Comments { get; }
         IClientRepository Clients { get; }
         IGenaricRepository<Admin> Admins { get; }

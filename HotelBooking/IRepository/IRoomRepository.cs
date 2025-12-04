@@ -5,6 +5,8 @@ namespace HotelBooking.IRepository
 {
     public interface IRoomRepository : IGenaricRepository<Room>
     {
-        List<Room> GetAvailableRooms();
+        public List<Room> GetAvailableRooms();
+        
+        public List<Room> GetRoomsByStuffId(int stuffId);
     }
 }

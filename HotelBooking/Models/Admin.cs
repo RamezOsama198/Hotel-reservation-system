@@ -16,8 +16,5 @@ namespace HotelBooking.Models
         [Range(1000, 50000)]
         public double? Salary { get; set; }
 
-        public virtual List<Stuff> Stuffs { get; set; } = new();
-        public virtual List<Booking> Bookings { get; set; } = new();
-        public virtual List<Comment> Comments { get; set; } = new();
     }
 }

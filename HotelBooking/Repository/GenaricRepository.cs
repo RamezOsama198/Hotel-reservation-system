@@ -55,5 +55,11 @@ namespace HotelBooking.Repository
             _model.Remove(model);
             _hotelDbContext.SaveChanges();
         }
+
+        public void Attach(TableModel model)
+        {
+            _model.Attach(model);
+            _hotelDbContext.SaveChanges();
+        }
     }
 }

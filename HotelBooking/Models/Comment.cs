@@ -16,7 +16,7 @@ namespace HotelBooking.Models
         [ForeignKey("client")]
         public string ClientId { get; set; }
         public Client client { get; set; }
-        //for many to many
-        public virtual List<Admin> Admins { get; set; } = new();
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }
