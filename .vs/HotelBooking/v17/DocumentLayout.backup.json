@@ -258,8 +258,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -270,8 +278,7 @@
               "RelativeToolTip": "HotelBooking\\Controllers\\AdminController.cs",
               "ViewState": "AgIAAHYAAAAAAAAAAAAAALIAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T15:54:06.503Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T15:54:06.503Z"
             },
             {
               "$type": "Document",
@@ -283,8 +290,7 @@
               "RelativeToolTip": "HotelBooking\\Repository\\RoomRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-30T14:22:30.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-30T14:22:30.118Z"
             },
             {
               "$type": "Document",
@@ -296,8 +302,7 @@
               "RelativeToolTip": "HotelBooking\\Seeder\\RoleSeeder.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-30T08:08:26.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-30T08:08:26.527Z"
             },
             {
               "$type": "Document",
@@ -309,8 +314,7 @@
               "RelativeToolTip": "HotelBooking\\ServicesLayer\\BookingService.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAAABQAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T21:41:16.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-03T21:41:16.397Z"
             },
             {
               "$type": "Document",
@@ -322,8 +326,7 @@
               "RelativeToolTip": "HotelBooking\\Controllers\\SuperAdminController.cs",
               "ViewState": "AgIAAIsAAAAAAAAAAAAAABgBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T23:13:57.177Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T23:13:57.177Z"
             },
             {
               "$type": "Document",
@@ -335,8 +338,7 @@
               "RelativeToolTip": "HotelBooking\\Views\\SuperAdmin\\CreateAdmin.cshtml",
               "ViewState": "AgIAABoAAAAAAAAAAAAAADEAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-29T22:45:56.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T22:45:56.298Z"
             },
             {
               "$type": "Document",
@@ -346,7 +348,7 @@
               "RelativeDocumentMoniker": "HotelBooking\\Views\\SuperAdmin\\EditUser.cshtml",
               "ToolTip": "D:\\DEPI_Project\\Hotel-reservation-system\\HotelBooking\\Views\\SuperAdmin\\EditUser.cshtml*",
               "RelativeToolTip": "HotelBooking\\Views\\SuperAdmin\\EditUser.cshtml*",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAACQAAABlAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAAB4AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-30T08:32:58.863Z",
               "EditorCaption": ""
@@ -361,8 +363,7 @@
               "RelativeToolTip": "HotelBooking\\Repository\\UnitOfWork.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAACIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-30T14:29:50.808Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-30T14:29:50.808Z"
             },
             {
               "$type": "Document",
@@ -374,8 +375,7 @@
               "RelativeToolTip": "HotelBooking\\Repository\\GenaricRepository.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAAAD0AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:16:50.155Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-02T14:16:50.155Z"
             },
             {
               "$type": "Document",
@@ -387,8 +387,7 @@
               "RelativeToolTip": "HotelBooking\\Models\\HotelDbContext.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABYAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:37:13.087Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-02T14:37:13.087Z"
             },
             {
               "$type": "Document",
@@ -400,8 +399,7 @@
               "RelativeToolTip": "HotelBooking\\ViewModel\\RegisterVM.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAAAB8AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T22:37:35.28Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T22:37:35.28Z"
             },
             {
               "$type": "Document",
@@ -413,8 +411,7 @@
               "RelativeToolTip": "HotelBooking\\ViewModel\\LoginVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T22:37:45.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T22:37:45.565Z"
             },
             {
               "$type": "Document",
@@ -426,8 +423,7 @@
               "RelativeToolTip": "HotelBooking\\ViewModel\\CommentVM.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T19:38:47.435Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-03T19:38:47.435Z"
             },
             {
               "$type": "Document",
@@ -439,8 +435,7 @@
               "RelativeToolTip": "HotelBooking\\Seeder\\SuperAdminSeeder.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T22:24:28.228Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-29T22:24:28.228Z"
             },
             {
               "$type": "Document",
@@ -452,8 +447,7 @@
               "RelativeToolTip": "HotelBooking\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAACcAAAAAAAAAAAAAADUAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-30T16:36:42.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-30T16:36:42.015Z"
             },
             {
               "$type": "Document",
@@ -1018,6 +1012,20 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-30T00:49:17.457Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
